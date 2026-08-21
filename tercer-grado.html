@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3er Grado — Aprendilandia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF8EC;
+    --ink:#2E2450;
+    --sky:#3FC1E0;
+    --sun:#FFC93C;
+    --coral:#FF6F61;
+    --grass:#5FCB6B;
+    --grape:#9B6BFF;
+    --tangerine:#FF9F45;
+    --pink:#FF6FA5;
+    --white:#FFFFFF;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Quicksand', sans-serif;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{
+    font-family:'Baloo 2', cursive;
+    font-weight:800;
+    margin:0;
+  }
+  a{text-decoration:none;color:inherit;}
+
+  /* NAV */
+  header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:var(--cream);
+    border-bottom:4px solid var(--ink);
+  }
+  .nav-inner{
+    max-width:1200px;
+    margin:0 auto;
+    padding:16px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:24px;
+  }
+  .logo-badge{
+    width:44px;height:44px;
+    background:var(--coral);
+    border-radius:14px;
+    border:3px solid var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    transform:rotate(-8deg);
+    box-shadow: 3px 4px 0 var(--ink);
+  }
+  .logo-badge span{font-size:22px;}
+  .back-link{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--white);
+    border:3px solid var(--ink);
+    border-radius:999px;
+    padding:9px 18px;
+    font-weight:700;
+    font-size:14.5px;
+    box-shadow:3px 4px 0 var(--ink);
+    transition:transform .15s ease;
+  }
+  .back-link:hover{transform:translate(-2px,-2px);}
+
+  /* HERO chico */
+  .mini-hero{
+    max-width:1200px;
+    margin:0 auto;
+    padding:56px 24px 30px;
+    text-align:center;
+    position:relative;
+  }
+  .mini-hero .grade-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:var(--sun);
+    color:var(--ink);
+    border:3px solid var(--ink);
+    border-radius:999px;
+    padding:8px 20px;
+    font-weight:700;
+    font-size:14px;
+    margin-bottom:20px;
+    transform:rotate(-2deg);
+  }
+  .mini-hero h1{
+    font-size:clamp(32px,5vw,52px);
+    line-height:1.05;
+  }
+  .mini-hero h1 .accent{color:var(--coral);}
+  .mini-hero p{
+    font-weight:600;
+    font-size:17px;
+    color:#5b5080;
+    max-width:520px;
+    margin:16px auto 0;
+  }
+  .float-emoji{
+    position:absolute;
+    font-size:30px;
+    animation: float 5s ease-in-out infinite;
+  }
+  .fe1{top:10%; left:6%; animation-delay:.2s;}
+  .fe2{top:20%; right:8%; animation-delay:1s;}
+  .fe3{bottom:0%; left:14%; animation-delay:1.6s;}
+  .fe4{bottom:5%; right:12%; animation-delay:.7s;}
+  @keyframes float{
+    0%,100%{transform:translateY(0px);}
+    50%{transform:translateY(-14px);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .float-emoji{animation:none;}
+  }
+
+  /* AREAS */
+  .section{
+    max-width:1000px;
+    margin:0 auto;
+    padding:20px 24px 100px;
+  }
+  .areas{
+    display:flex;
+    flex-direction:column;
+    gap:26px;
+  }
+  .area-card{
+    border:3px solid var(--ink);
+    border-radius:26px;
+    background:var(--white);
+    box-shadow:6px 7px 0 var(--ink);
+    overflow:hidden;
+    transition:box-shadow .18s ease;
+  }
+  .area-head{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    padding:24px 26px;
+    cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+    background:none;
+    border:none;
+    width:100%;
+    text-align:left;
+    font-family:inherit;
+  }
+  .area-icon{
+    width:64px;height:64px;
+    min-width:64px;
+    border-radius:18px;
+    border:3px solid var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    font-size:30px;
+  }
+  .area-info{flex-grow:1;}
+  .area-info h2{
+    font-size:24px;
+    margin-bottom:4px;
+  }
+  .area-info p{
+    font-size:14.5px;
+    font-weight:600;
+    color:#5b5080;
+    margin:0;
+  }
+  .area-toggle{
+    width:40px;height:40px;
+    min-width:40px;
+    border-radius:50%;
+    border:3px solid var(--ink);
+    background:var(--cream);
+    display:flex;align-items:center;justify-content:center;
+    font-size:20px;
+    font-weight:800;
+    transition:transform .25s ease, background .2s ease;
+  }
+  .area-card.open .area-toggle{
+    transform:rotate(45deg);
+  }
+
+  .area-card.lengua .area-icon{background:var(--sky);}
+  .area-card.matematica .area-icon{background:var(--grape); color:#fff;}
+  .area-card.ambiente .area-icon{background:var(--grass);}
+
+  .area-panel{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .35s ease;
+    border-top:3px solid transparent;
+  }
+  .area-card.open .area-panel{
+    border-top:3px solid var(--ink);
+  }
+  .activities-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(160px,1fr));
+    gap:16px;
+    padding:24px 26px 28px;
+    background:var(--cream);
+  }
+  .activity-card{
+    display:flex;
+    flex-direction:column;
+    background:var(--white);
+    border:3px solid var(--ink);
+    border-radius:16px;
+    padding:14px 18px 16px;
+    box-shadow:3px 4px 0 var(--ink);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .activity-card:hover{
+    transform:translate(-2px,-3px);
+    box-shadow:5px 6px 0 var(--ink);
+  }
+  .activity-link{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    font-weight:800;
+    font-size:15px;
+  }
+  .area-card.lengua .activity-card:hover{background:var(--sky);}
+  .area-card.matematica .activity-card:hover{background:var(--grape); color:#fff;}
+  .area-card.ambiente .activity-card:hover{background:var(--grass);}
+  .activity-link .arrow{font-size:16px;}
+  .activity-desc{
+    margin:8px 0 0;
+    font-size:13px;
+    font-weight:600;
+    line-height:1.45;
+    color:#5b5080;
+  }
+  .area-card.matematica .activity-card:hover .activity-desc{color:#EFE9FF;}
+
+  /* Nota de reemplazo */
+  .link-note{
+    margin-top:36px;
+  }
+  .link-note-box{
+    border:3px dashed var(--ink);
+    border-radius:18px;
+    background:#FFF3D6;
+    padding:18px 22px;
+    font-weight:700;
+    font-size:14.5px;
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+  }
+  .link-note-box .emoji{font-size:22px;}
+  code{
+    background:#fff;
+    border:2px solid var(--ink);
+    border-radius:8px;
+    padding:1px 8px;
+    font-family:monospace;
+    font-size:13px;
+  }
+
+  footer{
+    border-top:4px solid var(--ink);
+    padding:36px 24px 30px;
+  }
+  .footer-inner{
+    max-width:1200px;
+    margin:0 auto;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:16px;
+    font-weight:600;
+    font-size:13.5px;
+    color:#6b6089;
+  }
+
+  @media (max-width:600px){
+    .area-head{padding:18px;}
+    .area-icon{width:52px;height:52px;font-size:24px;}
+    .area-info h2{font-size:20px;}
+    .activities-grid{padding:18px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <div class="logo">
+      <div class="logo-badge"><span>🚀</span></div>
+      <span>Aprendilandia</span>
+    </div>
+    <a href="landing-educacion-primaria.html" class="back-link">← Volver a todos los grados</a>
+  </div>
+</header>
+
+<section class="mini-hero">
+  <span class="float-emoji fe1">📖</span>
+  <span class="float-emoji fe2">✖️</span>
+  <span class="float-emoji fe3">🌎</span>
+  <span class="float-emoji fe4">🦁</span>
+  <span class="grade-badge">🦁 3er Grado</span>
+  <h1>Elegí tu <span class="accent">área</span> y empezá a jugar</h1>
+  <p>Tocá una tarjeta para ver las actividades disponibles de esa área.</p>
+</section>
+
+<section class="section">
+  <div class="areas">
+
+    <div class="area-card lengua" id="card-lengua">
+      <button class="area-head" data-target="panel-lengua" aria-expanded="false">
+        <div class="area-icon">📖</div>
+        <div class="area-info">
+          <h2>Lengua</h2>
+          <p>Lectura, escritura y juegos con palabras.</p>
+        </div>
+        <div class="area-toggle">+</div>
+      </button>
+      <div class="area-panel" id="panel-lengua">
+        <div class="activities-grid">
+          <div class="activity-card">
+            <a href="https://ejemplo.com/tercer-grado/lengua/actividades-1" class="activity-link">Actividades 1 <span class="arrow">→</span></a>
+            <p class="activity-desc">Lectura de textos más largos y respuesta a preguntas de comprensión.</p>
+          </div>
+          <div class="activity-card">
+            <a href="https://ejemplo.com/tercer-grado/lengua/actividades-2" class="activity-link">Actividades 2 <span class="arrow">→</span></a>
+            <p class="activity-desc">Sustantivos, adjetivos y verbos: identificarlos en oraciones.</p>
+          </div>
+          <div class="activity-card">
+            <a href="https://ejemplo.com/tercer-grado/lengua/actividades-3" class="activity-link">Actividades 3 <span class="arrow">→</span></a>
+            <p class="activity-desc">Producción de textos breves: cuentos, notas y descripciones.</p>
+          </div>
+          <div class="activity-card">
+            <a href="https://ejemplo.com/tercer-grado/lengua/actividades-4" class="activity-link">Actividades 4 <span class="arrow">→</span></a>
+            <p class="activity-desc">Ortografía: uso de mayúsculas, puntos y signos de pregunta.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="area-card matematica" id="card-matematica">
+      <button class="area-head" data-target="panel-matematica" aria-expanded="false">
+        <div class="area-icon">✖️</div>
+        <div class="area-info">
+          <h2>Matemática</h2>
+          <p>Multiplicaciones, mediciones y problemas para pensar.</p>
+        </div>
+        <div class="area-toggle">+</div>
+      </button>
+      <div class="area-panel" id="panel-matematica">
+        <div class="activities-grid">
+          <div class="activity-card">
+            <a href="https://ejemplo.com/tercer-grado/matematica/actividades-1" class="activity-link">Actividades 1 <span class="arrow">→</span></a>
+            <p class="activity-desc">Tablas de multiplicar del 2 al 5 con juegos y desafíos.</p>
+          </div>
+          <div class="activity-card">
+            <a href="https://ejemplo.com/tercer-grado/matematica/actividades-2" class="activity-link">Actividades 2 <span class="arrow">→</span></a>
+            <p class="activity-desc">Problemas de suma, resta y multiplicación combinadas.</p>
+          </div>
+          <div class="activity-card">
+            <a href="https://ejemplo.com/tercer-grado/matematica/actividades-3" class="activity-link">Actividades 3 <span class="arrow">→</span></a>
+            <p class="activity-desc">Medidas de longitud, peso y capacidad en la vida diaria.</p>
+          </div>
+          <div class="activity-card">
+            <a href="https://ejemplo.com/tercer-grado/matematica/actividades-4" class="activity-link">Actividades 4 <span class="arrow">→</span></a>
+            <p class="activity-desc">Primeras nociones de división en partes iguales.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="area-card ambiente" id="card-ambiente">
+      <button class="area-head" data-target="panel-ambiente" aria-expanded="false">
+        <div class="area-icon">🌎</div>
+        <div class="area-info">
+          <h2>Ambiente</h2>
+          <p>Naturaleza, sociedad y el mundo que nos rodea.</p>
+        </div>
+        <div class="area-toggle">+</div>
+      </button>
+      <div class="area-panel" id="panel-ambiente">
+        <div class="activities-grid">
+          <div class="activity-card">
+            <a href="https://ejemplo.com/tercer-grado/ambiente/actividades-1" class="activity-link">Actividades 1 <span class="arrow">→</span></a>
+            <p class="activity-desc">Ecosistemas cercanos: monte, río y sus seres vivos.</p>
+          </div>
+          <div class="activity-card">
+            <a href="https://ejemplo.com/tercer-grado/ambiente/actividades-2" class="activity-link">Actividades 2 <span class="arrow">→</span></a>
+            <p class="activity-desc">La ciudad y el campo: trabajos y formas de vida.</p>
+          </div>
+          <div class="activity-card">
+            <a href="https://ejemplo.com/tercer-grado/ambiente/actividades-3" class="activity-link">Actividades 3 <span class="arrow">→</span></a>
+            <p class="activity-desc">Estados de la materia: sólido, líquido y gaseoso.</p>
+          </div>
+          <div class="activity-card">
+            <a href="https://ejemplo.com/tercer-grado/ambiente/actividades-4" class="activity-link">Actividades 4 <span class="arrow">→</span></a>
+            <p class="activity-desc">Normas de convivencia y cuidado de los espacios compartidos.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="link-note">
+    <div class="link-note-box">
+      <span class="emoji">🛠️</span>
+      <span>Nota para quien edite esta página: los enlaces de "Actividades" son ficticios (por ejemplo <code>https://ejemplo.com/tercer-grado/lengua/actividades-1</code>). Reemplazalos por las URL reales en el atributo <code>href</code> de cada <code>.activity-link</code>, y editá el texto dentro de <code>.activity-desc</code> para describir qué van a encontrar en esa página. Podés agregar o quitar tarjetas completas (<code>.activity-card</code>) copiando o borrando ese bloque dentro de cada <code>.activities-grid</code>.</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>🚀 Aprendilandia — 3er Grado</div>
+    <div>© 2026 Aprendilandia. Todos los derechos reservados.</div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.area-head').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var card = btn.closest('.area-card');
+      var panel = document.getElementById(btn.dataset.target);
+      var isOpen = card.classList.contains('open');
+
+      // Cerrar las otras tarjetas abiertas
+      document.querySelectorAll('.area-card.open').forEach(function(openCard){
+        if(openCard !== card){
+          openCard.classList.remove('open');
+          var openPanel = openCard.querySelector('.area-panel');
+          openPanel.style.maxHeight = null;
+          openCard.querySelector('.area-head').setAttribute('aria-expanded','false');
+        }
+      });
+
+      if(isOpen){
+        card.classList.remove('open');
+        panel.style.maxHeight = null;
+        btn.setAttribute('aria-expanded','false');
+      } else {
+        card.classList.add('open');
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+        btn.setAttribute('aria-expanded','true');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
